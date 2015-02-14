@@ -4,6 +4,7 @@ Compiles the fbs files into *.h files
 Version = None
 
 import os
+import shutil
 import platform
 import genutil
 import subprocess
@@ -27,12 +28,11 @@ def run_flatc(input_file, out_hdr) :
     cmd = [
         get_flatc_path(),
         '-c',
-        '--gen-includes',
-        '-o', out_tmp,
+        '-o', os.path.dirname(input_file),
         input_file
     ]
-    print(cmd)
     subprocess.call(cmd)
+    shutil.move(os.path.splitext(input_file)[0] + "_generated.h", out_hdr)
 
 #-------------------------------------------------------------------------------
 def generate(input_file, out_src, out_hdr) :

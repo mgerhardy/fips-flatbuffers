@@ -4,6 +4,6 @@
 ---
 exports:
     header-dirs: [ flatbuffers/include ]
-    modules :
-        flatc: .
+#    modules :
+#        flatc: .
 
