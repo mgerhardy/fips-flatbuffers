@@ -28,6 +28,7 @@ def run_flatc(input_file, out_hdr) :
     cmd = [
         get_flatc_path(),
         '-c',
+        '--gen-includes',
         '-o', os.path.dirname(input_file),
         input_file
     ]
@@ -41,7 +42,6 @@ def generate(input_file, out_src, out_hdr) :
     :param out_src:     must be None
     :param out_hdr:     path for output header files
     """
-    flatc_path = get_flatc_path()
-    print(flatc_path)
-    run_flatc(input_file, out_hdr)
-
+    if genutil.isDirty(Version, [input_file], [out_hdr]) :
+        flatc_path = get_flatc_path()
+        run_flatc(input_file, out_hdr)
